@@ -16,6 +16,8 @@ const (
 	TokenRBracket
 	TokenLBrace
 	TokenRBrace
+	TokenIdent
+	TokenComma
 )
 
 type Token struct {
@@ -38,6 +40,8 @@ func (t Token) String() string {
 		TokenRBracket: "RBRACKET",
 		TokenLBrace:   "LBRACE",
 		TokenRBrace:   "RBRACE",
+		TokenIdent:    "IDENT",
+		TokenComma:    "COMMA",
 	}
 	return values[t.Type] + " (" + t.Value + ")"
 }

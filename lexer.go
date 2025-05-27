@@ -56,6 +56,8 @@ func (l *Lexer) NextToken() Token {
 			return Token{Type: TokenLBrace, Value: string(r)}
 		case '}':
 			return Token{Type: TokenRBrace, Value: string(r)}
+		case ',':
+			return Token{Type: TokenComma, Value: string(r)}
 		case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
 			value := string(r)
 			for {
@@ -67,6 +69,18 @@ func (l *Lexer) NextToken() Token {
 				}
 			}
 			return Token{Type: TokenNumber, Value: value}
+		case 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+			'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z':
+			value := string(r)
+			for {
+				r = l.peek()
+				if (r >= 'a' && r <= 'z') || (r >= 'A' && r <= 'Z') {
+					value += string(l.read())
+				} else {
+					break
+				}
+			}
+			return Token{Type: TokenIdent, Value: value}
 		case 0:
 			return Token{Type: TokenEof, Value: ""}
 		default:

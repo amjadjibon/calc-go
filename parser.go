@@ -75,6 +75,30 @@ func (p *Parser) parsePrimary() Node {
 		t := NumberNode{n}
 		p.next(TokenNumber)
 		return &t
+	case TokenIdent:
+		name := p.cur.Value
+		p.next(TokenIdent)
+		if p.cur.Type == TokenLParen || p.cur.Type == TokenLBracket || p.cur.Type == TokenLBrace {
+			open := p.cur.Type
+			p.next(open)
+			var args []Node
+			if p.cur.Type != TokenRParen && p.cur.Type != TokenRBracket && p.cur.Type != TokenRBrace {
+				for {
+					args = append(args, p.parseExpression())
+					if p.cur.Type == TokenComma {
+						p.next(TokenComma)
+					} else {
+						break
+					}
+				}
+			}
+			if p.cur.Type != TokenRParen && p.cur.Type != TokenRBracket && p.cur.Type != TokenRBrace {
+				panic("expected closing bracket for function argument, got " + p.cur.String())
+			}
+			p.next(p.cur.Type)
+			return &FuncCallNode{Name: name, Args: args}
+		}
+		return &ConstNode{Name: name}
 	case TokenLParen, TokenLBracket, TokenLBrace:
 		p.next(p.cur.Type)
 		node := p.parseExpression()
