@@ -5,12 +5,15 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/amjadjibon/calc-go"
 )
 
 func main() {
 	if len(os.Args) > 1 {
 		expr := strings.Join(os.Args[1:], " ")
-		fmt.Println(expr)
+		root := calc.NewParser(expr).Parse()
+		fmt.Println(root.Eval())
 		return
 	}
 
@@ -32,6 +35,7 @@ func main() {
 			break
 		}
 
-		fmt.Println(expr)
+		root := calc.NewParser(expr).Parse()
+		fmt.Println(root.Eval())
 	}
 }
