@@ -10,3 +10,7 @@ lint:
 	@golangci-lint run --fix --timeout 5m
 test:
 	@go test -v ./...
+
+cover:
+	@go test -coverprofile=coverage.out ./...
+	@go tool cover -html=coverage.out -o coverage.html
