@@ -1,7 +1,6 @@
 package calc
 
 import (
-	"math"
 	"testing"
 )
 
@@ -65,7 +64,7 @@ func TestFunctionsAndConstants(t *testing.T) {
 	for _, test := range tests {
 		root := NewParser(test.expr).Parse()
 		result := root.Eval()
-		if math.Abs(result-test.expected) > 1e-6 {
+		if asFloat(result) != test.expected {
 			t.Errorf("%s: got %v, want %v", test.expr, result, test.expected)
 		}
 	}
@@ -74,7 +73,7 @@ func TestFunctionsAndConstants(t *testing.T) {
 func TestFloatParsing(t *testing.T) {
 	root := NewParser("1.3+1.4").Parse()
 	result := root.Eval()
-	if math.Abs(result-2.7) > 1e-6 {
+	if asFloat(result) != 2.7 {
 		t.Errorf("1.3+1.4: got %v, want 2.7", result)
 	}
 }

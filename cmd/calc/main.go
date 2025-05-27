@@ -27,7 +27,14 @@ func safeEvalPrint(expr string) {
 	}()
 	root := calc.NewParser(strings.TrimSpace(expr)).Parse()
 	result := root.Eval()
-	fmt.Println(formatResult(result))
+	switch v := result.(type) {
+	case string:
+		fmt.Println(v)
+	case float64:
+		fmt.Println(formatResult(v))
+	default:
+		fmt.Println(v)
+	}
 }
 
 func main() {
