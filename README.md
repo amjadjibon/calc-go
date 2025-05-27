@@ -10,7 +10,7 @@ A flexible command-line calculator written in Go. Supports arithmetic, scientifi
 - Multi-argument functions: e.g. `max(2, 5)`, `lcm(3, 4)`
 - Clean output: prints integers without a decimal, trims trailing zeros for floats
 
-## Usage
+## How to Use
 
 Build the binary:
 
@@ -27,7 +27,7 @@ Run interactively:
 Or pass an expression directly:
 
 ```
-./calc "sin(pi/2) + max(2, 5)"
+./bin/calc "sin(pi/2) + max(2, 5)"
 ```
 
 ## Example Expressions
@@ -41,6 +41,13 @@ max(2, 5)
 log(100)
 2.5 + 3.1
 ```
+
+## Supported Functions & Constants
+
+- Arithmetic: `+`, `-`, `*`, `/`, `^`
+- Grouping: `()`, `[]`, `{}`
+- Functions: `sin`, `cos`, `tan`, `asin`, `acos`, `atan`, `ln`, `log`, `sqrt`, `abs`, `ceil`, `floor`, `round`, `exp`, `max`, `min`, `gcd`, `lcm`, `factorial`, `mod`
+- Constants: `pi`, `e`
 
 ## Installation
 You can install `calc-go` using `go install`:
