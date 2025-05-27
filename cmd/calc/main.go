@@ -52,7 +52,7 @@ func main() {
 		}
 
 		if expr == "q" || expr == "exit" {
-			fmt.Println("Exiting...")
+			fmt.Println("sayonara...")
 			break
 		}
 
