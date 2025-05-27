@@ -15,13 +15,13 @@ A flexible command-line calculator written in Go. Supports arithmetic, scientifi
 Build the binary:
 
 ```
-go build -o calc ./cmd/calc
+make build
 ```
 
 Run interactively:
 
 ```
-./calc
+./bin/calc
 ```
 
 Or pass an expression directly:
@@ -42,6 +42,15 @@ log(100)
 2.5 + 3.1
 ```
 
+## Installation
+You can install `calc-go` using `go install`:
+
+```
+go install github.com/amjadjibon/calc-go/cmd/calc@latest
+```
+
+Or download a pre-built binary from the [releases page](https://github.com/amjadjibon/calc-go/releases)
+
 ## Releasing
 
 This project uses [GoReleaser](https://goreleaser.com/) for multi-platform releases. See `.goreleaser.yaml` for details.
@@ -49,4 +58,3 @@ This project uses [GoReleaser](https://goreleaser.com/) for multi-platform relea
 ## License
 
 MIT License. See [LICENSE](LICENSE).
-

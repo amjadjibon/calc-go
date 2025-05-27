@@ -1,10 +1,10 @@
 .PHONY: all build
 
 build:
-	@go build -o dist/calc ./cmd/calc/main.go
+	@go build -o bin/calc ./cmd/calc/main.go
 
 run: build
-	@./dist/calc
+	@./bin/calc
 
 lint:
 	@golangci-lint run --fix --timeout 5m
