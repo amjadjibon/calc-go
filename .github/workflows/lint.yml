@@ -32,4 +32,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: golangci-lint-report
-          path: output/golangci-lint-report.json
+          path: golangci-lint-report.json
