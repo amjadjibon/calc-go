@@ -34,7 +34,7 @@ func main() {
 	if len(os.Args) > 1 {
 		expr := strings.Join(os.Args[1:], " ")
 		if expr == "version" || expr == "-v" || expr == "--version" {
-			fmt.Println("calc-go version 1.0.0")
+			fmt.Printf("calc-go version %s\n", calc.Version)
 			return
 		}
 		safeEvalPrint(expr)
