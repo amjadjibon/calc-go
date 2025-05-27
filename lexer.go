@@ -57,6 +57,8 @@ func (l *Lexer) NextToken() Token {
 			return Token{Type: TokenRBrace, Value: string(r)}
 		} else if r == ',' {
 			return Token{Type: TokenComma, Value: string(r)}
+		} else if r == '%' {
+			return Token{Type: TokenMod, Value: string(r)}
 		} else if r >= '0' && r <= '9' {
 			value := string(r)
 			decimalFound := false

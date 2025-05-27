@@ -41,7 +41,7 @@ func (p *Parser) parseExpression() Node {
 
 func (p *Parser) parseTerm() Node {
 	n := p.parseFactor()
-	for p.cur.Type == TokenMul || p.cur.Type == TokenDiv {
+	for p.cur.Type == TokenMul || p.cur.Type == TokenDiv || p.cur.Type == TokenMod {
 		op := p.cur.Type
 		p.next(op)
 		n = &BinaryOpNode{op, n, p.parseFactor()}

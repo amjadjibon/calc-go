@@ -48,6 +48,8 @@ func (n *BinaryOpNode) Eval() float64 {
 		return n.Left.Eval() / n.Right.Eval()
 	case TokenPow:
 		return math.Pow(n.Left.Eval(), n.Right.Eval())
+	case TokenMod:
+		return math.Mod(n.Left.Eval(), n.Right.Eval())
 	default:
 		panic("unhandled default case")
 	}
