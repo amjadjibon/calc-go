@@ -32,12 +32,17 @@ func safeEvalPrint(expr string) {
 
 func main() {
 	if len(os.Args) > 1 {
-		safeEvalPrint(strings.Join(os.Args[1:], " "))
+		expr := strings.Join(os.Args[1:], " ")
+		if expr == "version" || expr == "-v" || expr == "--version" {
+			fmt.Println("calc-go version 1.0.0")
+			return
+		}
+		safeEvalPrint(expr)
 		return
 	}
 
 	scanner := bufio.NewScanner(os.Stdin)
-	fmt.Println("Enter expressions or 'q'/'exit' to quit.")
+	fmt.Println("enter expressions or 'q'/'exit' to quit.")
 	for {
 		fmt.Print("» ")
 		if !scanner.Scan() {

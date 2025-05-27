@@ -4,7 +4,7 @@ build:
 	@go build -o dist/calc ./cmd/calc/main.go
 
 run: build
-	@./bin/calc
+	@./dist/calc
 
 lint:
 	@golangci-lint run --fix --timeout 5m
