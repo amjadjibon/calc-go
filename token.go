@@ -3,7 +3,7 @@ package calc
 type TokenType int
 
 const (
-	TokenEof TokenType = iota
+	TokenEOF TokenType = iota
 	TokenNumber
 	TokenPlus
 	TokenMinus
@@ -27,7 +27,7 @@ type Token struct {
 
 func (t Token) String() string {
 	values := map[TokenType]string{
-		TokenEof:      "EOF",
+		TokenEOF:      "EOF",
 		TokenNumber:   "NUMBER",
 		TokenPlus:     "PLUS",
 		TokenMinus:    "MINUS",

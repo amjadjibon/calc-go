@@ -109,7 +109,7 @@ func (p *Parser) parsePrimary() Node {
 		return node
 	case TokenPlus, TokenMinus:
 		return p.parseUnary()
-	case TokenEof:
+	case TokenEOF:
 		panic("unexpected end of input")
 	default:
 		panic("unhandled default case")

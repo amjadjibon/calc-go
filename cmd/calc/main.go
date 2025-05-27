@@ -12,9 +12,7 @@ import (
 func formatResult(result float64) string {
 	str := fmt.Sprintf("%.10f", result)
 	str = strings.TrimRight(str, "0")
-	if strings.HasSuffix(str, ".") {
-		str = str[:len(str)-1]
-	}
+	str = strings.TrimSuffix(str, ".")
 	if str == "" {
 		return "0"
 	}

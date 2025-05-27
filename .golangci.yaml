@@ -1,0 +1,53 @@
+version: "2"
+linters:
+  default: none
+  enable:
+    - durationcheck
+    - errcheck
+    - gomodguard
+    - gosec
+    - govet
+    - ineffassign
+    - lll
+    - misspell
+    - revive
+    - sloglint
+    - staticcheck
+    - tagalign
+    - unconvert
+    - unused
+  settings:
+    errcheck:
+      check-type-assertions: true
+    lll:
+      line-length: 120
+    sloglint:
+      kv-only: true
+      no-global: all
+      context: all
+      static-msg: true
+      key-naming-case: snake
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gofumpt
+    - goimports
+  settings:
+    gofumpt:
+      extra-rules: true
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$

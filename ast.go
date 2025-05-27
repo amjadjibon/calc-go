@@ -129,42 +129,20 @@ func (n *FuncCallNode) Eval() float64 {
 		}
 		a := int(n.Args[0].Eval())
 		b := int(n.Args[1].Eval())
-		if a < 0 || b < 0 {
-			panic("gcd function requires non-negative integers")
-		}
-		for b != 0 {
-			a, b = b, a%b
-		}
-		return float64(a)
+		return float64(GCD(a, b))
 	case "lcm":
 		if len(n.Args) != 2 {
 			panic("lcm function requires two arguments: a and b")
 		}
 		a := int(n.Args[0].Eval())
 		b := int(n.Args[1].Eval())
-		if a < 0 || b < 0 {
-			panic("lcm function requires non-negative integers")
-		}
-		gcd := 1
-		for i := 1; i <= a && i <= b; i++ {
-			if a%i == 0 && b%i == 0 {
-				gcd = i
-			}
-		}
-		return float64(a * b / gcd)
+		return float64(LCM(a, b))
 	case "factorial":
 		if len(n.Args) != 1 {
 			panic("factorial function requires one argument")
 		}
 		num := int(n.Args[0].Eval())
-		if num < 0 {
-			panic("factorial function requires a non-negative integer")
-		}
-		result := 1
-		for i := 2; i <= num; i++ {
-			result *= i
-		}
-		return float64(result)
+		return float64(Factorial(num))
 	default:
 		panic("unknown function: " + n.Name)
 	}
