@@ -9,6 +9,18 @@ import (
 	"github.com/amjadjibon/calc-go"
 )
 
+func formatResult(result float64) string {
+	str := fmt.Sprintf("%.10f", result)
+	str = strings.TrimRight(str, "0")
+	if strings.HasSuffix(str, ".") {
+		str = str[:len(str)-1]
+	}
+	if str == "" {
+		return "0"
+	}
+	return str
+}
+
 func safeEvalPrint(expr string) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -16,7 +28,8 @@ func safeEvalPrint(expr string) {
 		}
 	}()
 	root := calc.NewParser(strings.TrimSpace(expr)).Parse()
-	fmt.Println(root.Eval())
+	result := root.Eval()
+	fmt.Println(formatResult(result))
 }
 
 func main() {
