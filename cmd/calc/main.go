@@ -9,11 +9,19 @@ import (
 	"github.com/amjadjibon/calc-go"
 )
 
+func safeEvalPrint(expr string) {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("error:", r)
+		}
+	}()
+	root := calc.NewParser(strings.TrimSpace(expr)).Parse()
+	fmt.Println(root.Eval())
+}
+
 func main() {
 	if len(os.Args) > 1 {
-		expr := strings.Join(os.Args[1:], " ")
-		root := calc.NewParser(expr).Parse()
-		fmt.Println(root.Eval())
+		safeEvalPrint(strings.Join(os.Args[1:], " "))
 		return
 	}
 
@@ -35,7 +43,6 @@ func main() {
 			break
 		}
 
-		root := calc.NewParser(expr).Parse()
-		fmt.Println(root.Eval())
+		safeEvalPrint(expr)
 	}
 }
