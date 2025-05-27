@@ -44,6 +44,18 @@ func (l *Lexer) NextToken() Token {
 			return Token{Type: TokenDiv, Value: string(r)}
 		case '^':
 			return Token{Type: TokenPow, Value: string(r)}
+		case '(':
+			return Token{Type: TokenLParen, Value: string(r)}
+		case ')':
+			return Token{Type: TokenRParen, Value: string(r)}
+		case '[':
+			return Token{Type: TokenLBracket, Value: string(r)}
+		case ']':
+			return Token{Type: TokenRBracket, Value: string(r)}
+		case '{':
+			return Token{Type: TokenLBrace, Value: string(r)}
+		case '}':
+			return Token{Type: TokenRBrace, Value: string(r)}
 		case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
 			value := string(r)
 			for {

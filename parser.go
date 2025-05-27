@@ -75,6 +75,14 @@ func (p *Parser) parsePrimary() Node {
 		t := NumberNode{n}
 		p.next(TokenNumber)
 		return &t
+	case TokenLParen, TokenLBracket, TokenLBrace:
+		p.next(p.cur.Type)
+		node := p.parseExpression()
+		if p.cur.Type != TokenRParen && p.cur.Type != TokenRBracket && p.cur.Type != TokenRBrace {
+			panic("expected closing bracket, got " + p.cur.String())
+		}
+		p.next(p.cur.Type)
+		return node
 	case TokenPlus, TokenMinus:
 		return p.parseUnary()
 	case TokenEof:
