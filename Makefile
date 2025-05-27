@@ -5,3 +5,8 @@ build:
 
 run: build
 	@./bin/calc
+
+lint:
+	@golangci-lint run --fix --timeout 5m
+test:
+	@go test -v ./...
