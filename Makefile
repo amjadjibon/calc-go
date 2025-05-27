@@ -1,7 +1,7 @@
 .PHONY: all build
 
 build:
-	@go build -o bin/calc ./cmd/calc/main.go
+	@go build -o dist/calc ./cmd/calc/main.go
 
 run: build
 	@./bin/calc
@@ -14,3 +14,10 @@ test:
 cover:
 	@go test -coverprofile=coverage.out ./...
 	@go tool cover -html=coverage.out -o coverage.html
+
+release: build
+	@goreleaser release --rm-dist
+
+clean:
+	@rm -rf dist
+	@rm -f coverage.out coverage.html

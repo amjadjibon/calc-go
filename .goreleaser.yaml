@@ -1,49 +1,38 @@
-# This is a simple GoReleaser config for building and releasing the calc binary
-# See https://goreleaser.com/customization/ for more options
-
-project_name: calc
-
-dist: dist
+version: 2
 
 builds:
-  - id: calc
+  - env:
+      - CGO_ENABLED=0
     main: ./cmd/calc/main.go
-    binary: calc
     goos:
       - linux
-      - darwin
       - windows
-    goarch:
-      - amd64
-      - arm64
-    ldflags: -s -w
+      - darwin
 
 archives:
-  - id: calc-archive
-    builds: [calc]
-    format: tar.gz
-    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
-    files:
-      - LICENSE
-      - README.md
-      - "calc"
-
-checksum:
-  name_template: "checksums.txt"
-
-release:
-  github:
-    owner: amjadjibon
-    name: calc-go
-
-git:
-  tag_sort: semver
+  - formats: [tar.gz]
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    # use zip for windows archives
+    format_overrides:
+      - goos: windows
+        formats: [zip]
 
 changelog:
   sort: asc
   filters:
     exclude:
-      - '^docs:'
-      - '^test:'
-      - '^chore:'
+      - "^docs:"
+      - "^test:"
 
+release:
+  footer: >-
+
+    ---
+
+    Released by [GoReleaser](https://github.com/goreleaser/goreleaser).
