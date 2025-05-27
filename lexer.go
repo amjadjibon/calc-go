@@ -60,9 +60,13 @@ func (l *Lexer) NextToken() Token {
 			return Token{Type: TokenComma, Value: string(r)}
 		case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
 			value := string(r)
+			decimalFound := false
 			for {
 				r = l.peek()
 				if r >= '0' && r <= '9' {
+					value += string(l.read())
+				} else if r == '.' && !decimalFound {
+					decimalFound = true
 					value += string(l.read())
 				} else {
 					break
